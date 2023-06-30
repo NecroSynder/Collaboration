@@ -1,4 +1,5 @@
 # COURSE TAB CRUDL
+
 #**************************************************************** ADD COURSE FUNCTIONS ****************************************************************#
         def course_exists(self, course_code, course_name):
                 conn = sqlite3.connect('attendancesystem.db')
@@ -12,7 +13,7 @@
 
         def add_course(self):
                 conn = sqlite3.connect('attendancesystem.db')
-                cursor = conn.cursor()
+                conn.cursor()
                 # Get the course info from the input fields
                 course_code = self.ccodeent.get().upper()
                 course_name = self.cnameent.get().upper()
@@ -45,7 +46,7 @@
                 if search_term:
                         query = '''SELECT course_code, courseName FROM course WHERE course_code = ? or courseName LIKE ?'''
                         search_param = '%' + search_term + '%'
-                        cursor.execute(query, (search_term, search_param))
+                        cursor.execute(query, (search_term, search_param,))
                 else:
                         query = '''SELECT course_code, courseName FROM course'''
                         cursor.execute(query)
@@ -213,3 +214,6 @@
                                           width=100, height=35, command=self.update_course_list)
                 self.update_btn.place(x=460, y=345)
                 
+if __name__ == "__main__":
+    app = AttendanceSystemApp()
+    app.mainloop()
